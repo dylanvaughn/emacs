@@ -1,0 +1,9 @@
+To enable these files, add this to the top your .emacs:
+
+;; load shared config
+(setq shared-config-dir "~/apps/emacs/")
+(load-file (concat shared-config-dir "dotemacs.el"))
+
+where "~/app/emacs/" is the directory you cloned this repo to.
+
+You can add custom settings after these lines in your .emacs file.
