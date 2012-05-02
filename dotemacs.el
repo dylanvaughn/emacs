@@ -83,6 +83,8 @@
 ;; ruby stuff
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.builder$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.knife$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.watchr$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 
 (add-hook 'ruby-mode-hook
@@ -128,7 +130,10 @@
 ;; javascript mode
 (autoload #'espresso-mode "espresso" "Start espresso-mode" t)
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . espresso-mode))
+
+;; json mode
+(require 'json-mode)
+(add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 
 ;; http://emacs-fu.blogspot.com/2010/02/interactive-replacement.html
 (require 'iedit)
@@ -203,3 +208,15 @@
 (rvm-use-default) ;; use rvm’s default ruby for the current Emacs session
 
 (load "soy-mode")
+
+;; save org-mode time tracking between sessions
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
+
+;; snippets
+(add-to-list 'load-path "~/apps/emacs/lib/yasnippet")
+(require 'yasnippet)
+(yas/global-mode 1)
+
+;; jinja2 mode
+(require 'jinja2-mode)
