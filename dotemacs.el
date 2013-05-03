@@ -86,6 +86,7 @@
 (add-to-list 'auto-mode-alist '("\\.knife$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.watchr$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
 
 (add-hook 'ruby-mode-hook
           '(lambda ()
@@ -182,16 +183,14 @@
 ;; haml mode
 (require 'haml-mode)
 
-(add-hook 'eshell-mode-hook
-   '(lambda nil
-   (let ((path))
-      (setq path "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/ruby/bin:/home/dylan/.rvm/bin:.")
-    (setenv "PATH" path))
-   (local-set-key "\C-u" 'eshell-kill-input))
- )
+;; (add-hook 'eshell-mode-hook
+;;    '(lambda nil
+;;    (let ((path))
+;;       (setq path "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/ruby/bin:/home/dylan/.rvm/bin:.")
+;;     (setenv "PATH" path))
+;;    (local-set-key "\C-u" 'eshell-kill-input))
+;;  )
          
-
-
 (autoload 'markdown-mode "markdown-mode.el"
   "Major mode for editing Markdown files" t)
 (setq auto-mode-alist
@@ -204,7 +203,6 @@
 (setq org-log-done t)
 
 (require 'rvm)
-
 (rvm-use-default) ;; use rvm’s default ruby for the current Emacs session
 
 (load "soy-mode")
@@ -220,3 +218,19 @@
 
 ;; jinja2 mode
 (require 'jinja2-mode)
+
+;; https://gist.github.com/dgutov/1274520
+(defadvice ruby-indent-line (after unindent-closing-paren activate)
+  (let ((column (current-column))
+        indent offset)
+    (save-excursion
+      (back-to-indentation)
+      (let ((state (syntax-ppss)))
+        (setq offset (- column (current-column)))
+        (when (and (eq (char-after) ?\))
+                   (not (zerop (car state))))
+          (goto-char (cadr state))
+          (setq indent (current-indentation)))))
+    (when indent
+      (indent-line-to indent)
+      (when (> offset 0) (forward-char offset)))))
