@@ -256,3 +256,6 @@
 ;; protocol buffer support
 (require 'protobuf-mode)
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+
+;; use ibuffer
+(defalias 'list-buffers 'ibuffer)
