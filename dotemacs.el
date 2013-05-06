@@ -33,6 +33,9 @@
 (add-to-list 'auto-mode-alist '("\\.erb$"     . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.mak$"     . nxml-mode))
 
+;; Google Stylesheets should use CSS mode
+(add-to-list 'auto-mode-alist '("\\.gss$" . css-mode))
+
 ;; php-mode
 ;; not doing require b/c of this error:
 ;; http://stackoverflow.com/questions/898063/making-php-mode-compatible-with-emacs-23
@@ -52,12 +55,18 @@
   (c-set-offset 'arglist-close 0))
 (add-hook 'php-mode-hook 'wicked/php-mode-init)
 
+(defun go-to-shell ()
+  (set-buffer "*eshell*"))
+
 ;; some useful (I think) key mappings
 (global-set-key "\C-l" 'goto-line) ; [Ctrl]-[L]
 (global-set-key "\C-c#" 'comment-region)
 (global-set-key "\C-c3" 'uncomment-region)
 (global-set-key "\C-cf" 'align-regexp)
 (global-set-key "\C-cr" 'rename-buffer)
+(global-set-key "\C-cr" 'rename-buffer)
+(global-set-key "\C-ce" 'erase-buffer)
+(global-set-key "\C-cs" '(set-buffer "*eshell*"))
 
 ;; try to make working in shells nicer
 (setenv "PAGER" "/bin/cat")
@@ -87,6 +96,7 @@
 (add-to-list 'auto-mode-alist '("\\.watchr$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
 
 (add-hook 'ruby-mode-hook
           '(lambda ()
@@ -160,6 +170,7 @@
 
 (require 'magit)
 (global-set-key "\C-cg" 'magit-status)
+(setq magit-process-popup-time 0)
 
 (autoload 'mo-git-blame-file "mo-git-blame" nil t)
 (autoload 'mo-git-blame-current "mo-git-blame" nil t)
@@ -234,3 +245,14 @@
     (when indent
       (indent-line-to indent)
       (when (> offset 0) (forward-char offset)))))
+
+;; Edit With Emacs Chrome extension
+;; https://chrome.google.com/webstore/detail/ljobjlafonikaiipfkggjbhkghgicgoh
+
+(when (require 'edit-server nil t)
+  (setq edit-server-new-frame nil)
+  (edit-server-start))
+
+;; protocol buffer support
+(require 'protobuf-mode)
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
