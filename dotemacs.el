@@ -262,3 +262,4 @@
 
 ;; use ibuffer
 (defalias 'list-buffers 'ibuffer)
+(setq ibuffer-expert t)
