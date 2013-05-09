@@ -89,6 +89,9 @@
 ;; use utf-8 by default
 (prefer-coding-system 'utf-8)
 
+;; use css mode for google stylesheets
+(add-to-list 'auto-mode-alist '("\\.gss$" . css-mode))
+
 ;; ruby stuff
 (add-to-list 'auto-mode-alist '("\\.rake$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.builder$" . ruby-mode))
