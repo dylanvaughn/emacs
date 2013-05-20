@@ -263,3 +263,10 @@
 ;; use ibuffer
 (defalias 'list-buffers 'ibuffer)
 (setq ibuffer-expert t)
+
+(defun touch ()
+  "updates mtime on the file for the current buffer"
+  (interactive)
+  (shell-command (concat "touch " (shell-quote-argument (buffer-file-name))))
+  (clear-visited-file-modtime))
+(global-set-key "\C-ct" 'touch)
