@@ -146,6 +146,7 @@
 ;; javascript mode
 (autoload #'espresso-mode "espresso" "Start espresso-mode" t)
 (add-to-list 'auto-mode-alist '("\\.js$" . espresso-mode))
+(setq espresso-indent-level 2)
 
 ;; json mode
 (require 'json-mode)
