@@ -219,8 +219,10 @@
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
 
-(require 'rvm)
-(rvm-use-default) ;; use rvm’s default ruby for the current Emacs session
+;; (require 'rvm)
+;; (rvm-use-default) ;; use rvm’s default ruby for the current Emacs session
+(require 'rbenv)
+(global-rbenv-mode)
 
 (load "soy-mode")
 
@@ -273,3 +275,4 @@
   (shell-command (concat "touch " (shell-quote-argument (buffer-file-name))))
   (clear-visited-file-modtime))
 (global-set-key "\C-ct" 'touch)
+
