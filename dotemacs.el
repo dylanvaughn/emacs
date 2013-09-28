@@ -151,6 +151,7 @@
 ;; json mode
 (require 'json-mode)
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+(add-to-list 'auto-mode-alist '("\\.json.erb$" . json-mode))
 
 ;; http://emacs-fu.blogspot.com/2010/02/interactive-replacement.html
 (require 'iedit)
