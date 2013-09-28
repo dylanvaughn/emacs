@@ -222,8 +222,11 @@
 
 ;; (require 'rvm)
 ;; (rvm-use-default) ;; use rvm’s default ruby for the current Emacs session
-(require 'rbenv)
-(global-rbenv-mode)
+(if (file-exists-p "~/.rbenv/version")
+    (progn
+      (require 'rbenv)
+      (global-rbenv-mode))
+  nil)
 
 (load "soy-mode")
 
