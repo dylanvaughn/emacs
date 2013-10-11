@@ -23,15 +23,16 @@
 (setq ido-enable-flex-matching t)
 
 ;; nxml mode for XML/HTML editing
-(add-to-list 'auto-mode-alist '("\\.xml$"     . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.html$"    . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.htm$"     . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.shtml$"   . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.jsp$"     . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.asp$"     . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl.php$" . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.erb$"     . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.mak$"     . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.xml$"      . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.html$"     . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.htm$"      . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.shtml$"    . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.jsp$"      . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.asp$"      . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl.php$"  . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.erb$"      . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.mak$"      . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache$" . nxml-mode))
 
 ;; Google Stylesheets should use CSS mode
 (add-to-list 'auto-mode-alist '("\\.gss$" . css-mode))
