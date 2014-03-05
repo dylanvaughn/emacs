@@ -281,3 +281,20 @@
   (clear-visited-file-modtime))
 (global-set-key "\C-ct" 'touch)
 
+;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
+(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
+(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
+(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+
+;;; make Groovy mode electric by default.
+(add-hook 'groovy-mode-hook
+          '(lambda ()
+             (require 'groovy-electric)
+             (groovy-electric-mode)))
+
+
+;; java annotations indentation
+(require 'java-mode-indent-annotations)
+(defun my-java-mode-hook ()
+  (java-mode-indent-annotations-setup))
+(add-hook 'java-mode-hook' my-java-mode-hook)
