@@ -65,6 +65,7 @@
 (global-set-key "\C-c3" 'uncomment-region)
 (global-set-key "\C-cf" 'align-regexp)
 (global-set-key "\C-cr" 'rename-buffer)
+(global-set-key "\C-c\C-f" 'revert-buffer)
 (global-set-key "\C-cr" 'rename-buffer)
 (global-set-key "\C-ce" 'erase-buffer)
 (global-set-key "\C-cs" '(set-buffer "*eshell*"))
