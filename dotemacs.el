@@ -236,11 +236,6 @@
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 
-;; snippets
-(add-to-list 'load-path "~/apps/emacs/lib/yasnippet")
-(require 'yasnippet)
-(yas/global-mode 1)
-
 ;; jinja2 mode
 (require 'jinja2-mode)
 
