@@ -33,6 +33,7 @@
 (add-to-list 'auto-mode-alist '("\\.erb$"      . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.mak$"      . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.launch$"   . nxml-mode))
 
 ;; Google Stylesheets should use CSS mode
 (add-to-list 'auto-mode-alist '("\\.gss$" . css-mode))
@@ -48,8 +49,9 @@
   "Set some buffer-local variables."
   (setq case-fold-search t)
   (setq indent-tabs-mode nil)
+  ;; (setq tab-width 4)
   (setq fill-column 78)
-  (setq c-basic-offset 2)
+  (setq c-basic-offset 4)
   (c-set-offset 'arglist-cont 0)
   (c-set-offset 'arglist-intro '+)
   (c-set-offset 'case-label 2)
@@ -300,3 +302,5 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
+;; arduino-mode
+(require 'arduino-mode)
