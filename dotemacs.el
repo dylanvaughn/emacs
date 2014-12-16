@@ -312,3 +312,5 @@
     (shell-command-on-region (mark) (point) "python -m json.tool" (buffer-name) t)
     )
   )
+;; clojure-mode
+(require 'clojure-mode)
