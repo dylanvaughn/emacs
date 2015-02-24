@@ -330,6 +330,7 @@
   )
 ;; clojure-mode
 (require 'clojure-mode)
+(add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
 
 ;; smex
 (require 'smex)
@@ -341,3 +342,9 @@
 
 (unless (package-installed-p 'cider)
   (package-install 'cider))
+
+(unless (package-installed-p 'company)
+  (package-install 'company))
+(add-hook 'after-init-hook 'global-company-mode)
+
+(show-paren-mode 1)
