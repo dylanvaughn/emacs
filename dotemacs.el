@@ -7,7 +7,7 @@
 (add-to-list 'package-archives
              '("tromey" . "http://tromey.com/elpa/") t)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize)
 
 ;; Download the ELPA archive description if needed.
@@ -172,6 +172,10 @@
 (require 'json-mode)
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 (add-to-list 'auto-mode-alist '("\\.json.erb$" . json-mode))
+(add-hook 'json-mode-hook
+          (lambda ()
+            (make-local-variable 'js-indent-level)
+            (setq js-indent-level 2)))
 
 ;; http://emacs-fu.blogspot.com/2010/02/interactive-replacement.html
 (require 'iedit)
@@ -194,6 +198,9 @@
     (message (concat "Now editing " fname " as root!"))
     )
   )
+
+(unless (package-installed-p 'magit)
+  (package-install 'magit))
 
 (require 'magit)
 (global-set-key "\C-cg" 'magit-status)
@@ -348,3 +355,12 @@
 (add-hook 'after-init-hook 'global-company-mode)
 
 (show-paren-mode 1)
+
+;; robe ruby helper
+;; (defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+;;   (rvm-activate-corresponding-ruby))
+(unless (package-installed-p 'robe)
+  (progn
+    (package-refresh-contents)
+    (package-install 'robe)))
+(add-hook 'ruby-mode-hook 'robe-mode)
