@@ -2,12 +2,9 @@
 
 ;; Define package repositories
 (require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives
-             '("tromey" . "http://tromey.com/elpa/") t)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+ (add-to-list 'package-archives '("gnu"       . "http://elpa.gnu.org/packages/"))
+ (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+ (add-to-list 'package-archives '("melpa"     . "http://melpa.org/packages/"))
 (package-initialize)
 
 ;; Download the ELPA archive description if needed.
@@ -122,6 +119,7 @@
 (add-to-list 'auto-mode-alist '("Gemfile$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Vagrantfile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Guardfile$" . ruby-mode))
 
 (add-hook 'ruby-mode-hook
           '(lambda ()
@@ -364,3 +362,15 @@
     (package-refresh-contents)
     (package-install 'robe)))
 (add-hook 'ruby-mode-hook 'robe-mode)
+
+;; http://stackoverflow.com/a/3669681
+(setq frame-title-format
+      (list (format "%s %%S: %%j " (system-name))
+        '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+
+(defun eshell-clear-buffer ()
+  "Clear terminal"
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase-buffer)
+    (eshell-send-input)))
