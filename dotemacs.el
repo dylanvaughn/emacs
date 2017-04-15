@@ -1,17 +1,24 @@
 ; Shared Emacs Config
 
 ;; Define package repositories
+;; the package manager
 (require 'package)
- (add-to-list 'package-archives '("gnu"       . "http://elpa.gnu.org/packages/"))
- (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
- (add-to-list 'package-archives '("melpa"     . "http://melpa.org/packages/"))
+(setq
+ package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                    ("org" . "http://orgmode.org/elpa/")
+                    ("marmalade" . "http://marmalade-repo.org/packages/")
+                    ("melpa" . "http://melpa.org/packages/")
+                    ("melpa-stable" . "http://stable.melpa.org/packages/"))
+ package-archive-priorities '(("melpa-stable" . 1)))
 (package-initialize)
 
 ;; Download the ELPA archive description if needed.
 ;; This informs Emacs about the latest versions of all packages, and
 ;; makes them available for download.
 (when (not package-archive-contents)
-  (package-refresh-contents))
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
 
 ;; Add all subdirectories to load-path
 (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
@@ -35,6 +42,9 @@
 (ido-mode t)
 (setq ido-enable-flex-matching t)
 
+;; go mode
+(require 'go-mode-autoloads)
+
 ;; nxml mode for XML/HTML editing
 (add-to-list 'auto-mode-alist '("\\.xml$"      . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.html$"     . nxml-mode))
@@ -47,6 +57,14 @@
 (add-to-list 'auto-mode-alist '("\\.mak$"      . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.launch$"   . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.xacro$"    . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.gazebo$"   . nxml-mode))
+
+;; hcl mode
+(require 'hcl-mode)
+(add-to-list 'auto-mode-alist '("\\.tf$" . hcl-mode))
+(add-to-list 'auto-mode-alist '("\\.tfvars$" . hcl-mode))
+(add-to-list 'auto-mode-alist '("\\.terragrunt$" . hcl-mode))
 
 ;; Google Stylesheets should use CSS mode
 (add-to-list 'auto-mode-alist '("\\.gss$" . css-mode))
@@ -374,3 +392,20 @@
   (let ((inhibit-read-only t))
     (erase-buffer)
     (eshell-send-input)))
+
+;; less mode
+(require 'less-css-mode)
+;; (add-hook 'less-css-mode-hook
+
+;; dockerfile mode
+(require 'dockerfile-mode)
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-mode))
+
+;; elixir
+(unless (package-installed-p 'elixir-mode)
+  (package-install 'elixir-mode))
+
+;; ensime
+(use-package ensime
+  :ensure t
+  :pin melpa-stable)
