@@ -409,3 +409,10 @@
 (use-package ensime
   :ensure t
   :pin melpa-stable)
+
+(defun eshell-clear-buffer ()
+  "Clear eshell"
+  (interactive)
+  (let ((inhibit-read-only t))
+    (erase buffer)
+    (eshell-send-input)))
