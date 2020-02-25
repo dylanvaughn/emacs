@@ -416,3 +416,6 @@
   (let ((inhibit-read-only t))
     (erase buffer)
     (eshell-send-input)))
+
+;; powershell mode
+(require 'powershell)
