@@ -60,11 +60,11 @@
 (add-to-list 'auto-mode-alist '("\\.xacro$"    . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.gazebo$"   . nxml-mode))
 
-;; hcl mode
-(require 'hcl-mode)
-(add-to-list 'auto-mode-alist '("\\.tf$" . hcl-mode))
-(add-to-list 'auto-mode-alist '("\\.tfvars$" . hcl-mode))
-(add-to-list 'auto-mode-alist '("\\.terragrunt$" . hcl-mode))
+;; terraform mode
+(require 'terraform-mode)
+(add-to-list 'auto-mode-alist '("\\.tf$" . terraform-mode))
+(add-to-list 'auto-mode-alist '("\\.tfvars$" . terraform-mode))
+(add-to-list 'auto-mode-alist '("\\.terragrunt$" . terraform-mode))
 
 ;; Google Stylesheets should use CSS mode
 (add-to-list 'auto-mode-alist '("\\.gss$" . css-mode))
